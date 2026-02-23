@@ -1,0 +1,78 @@
+:root {
+    --bg-color: #2c3e50;
+    --taskbar-color: rgba(255, 255, 255, 0.1);
+    --window-bg: rgba(255, 255, 255, 0.95);
+    --accent-color: #3498db;
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--font-main);
+}
+
+#desktop {
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-color) no-repeat center center;
+    background-size: cover;
+    transition: background 0.5s ease;
+}
+
+#dashboard {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    text-align: right;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+#clock { font-size: 3rem; font-weight: bold; }
+
+#taskbar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background: var(--taskbar-color);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.window {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 600px;
+    height: 400px;
+    background: var(--window-bg);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.window-header {
+    padding: 10px;
+    background: #eee;
+    display: flex;
+    justify-content: space-between;
+    cursor: move;
+}
+
+.window-content { padding: 15px; flex-grow: 1; }
+
+#doc-editor {
+    width: 100%;
+    height: 80%;
+    border: 1px solid #ccc;
+    resize: none;
+}
+
+.hidden { display: none; }
