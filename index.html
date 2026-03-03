@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenOS Prototype</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1> Welcome to orcOS!</h1> <!-- Added March 3rd, 2026 2:31PM
+    -->
+    <div id="desktop">
+        <div id="dashboard">
+            <div id="clock">00:00:00</div>
+            <div id="weather">Loading weather...</div>
+        </div>
+
+        <div id="app-writer" class="window hidden">
+            <div class="window-header">
+                <span>Document Writer</span>
+                <button onclick="closeApp('app-writer')">X</button>
+            </div>
+            <div class="window-content">
+                <textarea id="doc-editor" placeholder="Start typing your masterpiece..."></textarea>
+                <button class="save-btn" onclick="saveFile()">Save to OS Storage</button>
+            </div>
+        </div>
+
+        <div id="taskbar">
+            <button class="start-btn">Menu</button>
+            <div class="app-icons">
+                <button onclick="openApp('app-writer')">Writer</button>
+                <button onclick="alert('Email Client coming in v2!')">Email</button>
+                <button onclick="toggleSettings()">Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
