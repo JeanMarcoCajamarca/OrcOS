@@ -1,6 +1,6 @@
 /* new code below, march 2, 2:50pm */
 :root {
-    --bg-color: #1a1a2e; /* Deep midnight blue */
+    --bg-color: #0B2410 /* was orginally Deep midnight blue: #1a1a2e; */
     --taskbar-bg: rgba(255, 255, 255, 0.1);
     --window-bg: rgba(255, 255, 255, 0.92);
     --accent-color: #00a8ff;
