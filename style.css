@@ -172,9 +172,7 @@ body, html {
     transform: translateY(-5px);
 }
 
-.hidden { display: none; }
-
-/* previously...
+.hidden { display: none; } /* previously...
 :root {
     --bg-color: #2c3e50;
     --taskbar-color: rgba(255, 255, 255, 0.1);
@@ -182,7 +180,6 @@ body, html {
     --accent-color: #3498db;
     --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 body, html {
     margin: 0;
     padding: 0;
@@ -190,7 +187,6 @@ body, html {
     overflow: hidden;
     font-family: var(--font-main);
 }
-
 #desktop {
     width: 100vw;
     height: 100vh;
@@ -198,7 +194,6 @@ body, html {
     background-size: cover;
     transition: background 0.5s ease;
 }
-
 #dashboard {
     position: absolute;
     top: 20px;
@@ -207,9 +202,7 @@ body, html {
     text-align: right;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
-
 #clock { font-size: 3rem; font-weight: bold; }
-
 #taskbar {
     position: absolute;
     bottom: 0;
@@ -221,7 +214,6 @@ body, html {
     align-items: center;
     padding: 0 20px;
 }
-
 .window {
     position: absolute;
     top: 100px;
@@ -234,7 +226,6 @@ body, html {
     display: flex;
     flex-direction: column;
 }
-
 .window-header {
     padding: 10px;
     background: #eee;
@@ -242,14 +233,11 @@ body, html {
     justify-content: space-between;
     cursor: move;
 }
-
 .window-content { padding: 15px; flex-grow: 1; }
-
 #doc-editor {
     width: 100%;
     height: 80%;
     border: 1px solid #ccc;
     resize: none;
 }
-
 .hidden { display: none; } */
