@@ -175,6 +175,61 @@ body, html {
 
 .hidden { display: none; } 
 
+/* --- start menu, march 5th 2026 --- */
+#start-menu {
+    position: absolute;
+    bottom: 80px; /* Above the taskbar */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    background: rgba(11, 36, 16, 0.9); /* Matching your dark green */
+    backdrop-filter: blur(15px);
+    border: var(--glass-border);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 100;
+    animation: menuSlideUp 0.2s ease-out;
+}
+
+@keyframes menuSlideUp {
+    from { opacity: 0; transform: translate(-50%, 10px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.menu-header {
+    color: var(--accent-color);
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 5px;
+}
+
+.menu-items button {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menu-items button:hover {
+    background: rgba(255,255,255,0.1);
+    padding-left: 15px;
+}
+
+.menu-items hr {
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 10px 0;
+}
+
 /* Import Blackletter Font, March 5th, 2026 */
 @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
 
