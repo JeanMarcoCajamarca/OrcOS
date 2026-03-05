@@ -90,5 +90,3 @@ document.getElementById('desktop').addEventListener('click', function(e) {
         menu.classList.add('hidden');
     }
 });
-    
-});
