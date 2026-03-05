@@ -204,6 +204,47 @@ body, html {
     letter-spacing: 2px;
 }
 
+/* 1. Define the Breathing Animation, for Jemma, March 5th 2026. */
+@keyframes breathe {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+    }
+    50% {
+        transform: scale(1.03); /* Subtle growth */
+        filter: drop-shadow(0 10px 25px rgba(46, 204, 113, 0.4)); /* Green pulse */
+    }
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+    }
+}
+
+/* 2. Apply to the Mascot */
+#desktop-mascot {
+    width: 250px;
+    height: auto;
+    margin-bottom: -10px;
+    z-index: 5;
+    /* Animation: Name, Duration, Timing, Loop */
+    animation: breathe 4s ease-in-out infinite; 
+    transition: filter 0.3s ease;
+}
+
+/* 3. Optional: Make the text pulse slightly too */
+#welcome-msg {
+    font-family: 'UnifrakturMaguntia', serif;
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 2px;
+    animation: textPulse 4s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
 /* previously...
 :root {
     --bg-color: #2c3e50;
