@@ -75,4 +75,20 @@ window.addEventListener('drop', (e) => {
     if (files.length > 0) {
         alert(`Detected ${files[0].name}. This would be uploaded to your OS storage.`);
     }
+
+function toggleStartMenu() {
+    const menu = document.getElementById('start-menu');
+    menu.classList.toggle('hidden');
+}
+
+// Close the menu if the user clicks anywhere else on the desktop, new code march 5th 2:43pm
+document.getElementById('desktop').addEventListener('click', function(e) {
+    const menu = document.getElementById('start-menu');
+    const startBtn = document.querySelector('.start-btn');
+    
+    if (!menu.contains(e.target) && e.target !== startBtn) {
+        menu.classList.add('hidden');
+    }
+});
+    
 });
