@@ -31,6 +31,18 @@
             <img src="orcOSmascot.png" alt="orcOS Mascot" id="desktop-mascot">
             <div id="welcome-msg">Welcome to orcOS!</div>
         </div>
+        <!-- new code for start menu, March 5th 2026 2:35PM
+        -->
+        <div id="start-menu" class="hidden">
+            <div class="menu-header">orcOS v1.0</div>
+            <div class="menu-items">
+                <button onclick="alert('System is up to date.')">System Update</button>
+                <button onclick="toggleSettings()">Personalize</button>
+                <button onclick="location.reload()">Restart</button>
+                <hr>
+                <button onclick="alert('Goodbye, Commander.')">Power Off</button>
+        </div>
+        </div>
         <div id="taskbar">
             <button class="start-btn">Main Menu</button>
             <div class="app-icons">
