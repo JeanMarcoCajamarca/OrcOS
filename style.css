@@ -115,7 +115,12 @@ body, html {
 }
 
 .mascot-container {
-    background-image: url('assets/orcOSmascot.png');
+    width: 200px; /* Ensure the container has size */
+    height: 200px;
+    background-image: url('./assets/orcOSmascot.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /* --- Start Menu Pull-Up Effect --- */
