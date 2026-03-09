@@ -69,7 +69,7 @@ function closeApp(id) {
 
 function toggleStartMenu() {
     const menu = document.getElementById('start-menu');
-    menu.classList.toggle('hidden');
+    menu.classList.toggle('show'); // This triggers the CSS transition - March 9th 2026
 }
 
 function toggleBackground() {
@@ -86,13 +86,13 @@ window.onload = () => {
     renderFiles();
 };
 
-// Close menu on desktop click
 document.getElementById('desktop').addEventListener('click', function(e) {
     const menu = document.getElementById('start-menu');
     const startBtn = document.querySelector('.start-btn');
-    if (menu && !menu.classList.contains('hidden')) {
+    
+    if (menu && !menu.classList.contains('show')) {
         if (!menu.contains(e.target) && !startBtn.contains(e.target)) {
-            menu.classList.add('hidden');
+            menu.classList.add('show');
         }
     }
 });
