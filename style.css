@@ -114,6 +114,10 @@ body, html {
     z-index: 5;
 }
 
+.mascot-container {
+    background-image: url('assets/orcOSmascot.png');
+}
+
 /* --- Start Menu Pull-Up Effect --- */
 #start-menu {
     position: absolute;
