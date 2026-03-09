@@ -117,7 +117,7 @@ body, html {
 .mascot-container {
     width: 200px; /* Ensure the container has size */
     height: 200px;
-    background-image: url('./assets/orcOSmascot.png');
+    background-image: url('./assets/orcOSmascot.PNG');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
