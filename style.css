@@ -102,6 +102,49 @@ body, html {
     animation: textPulse 4s ease-in-out infinite;
 }
 
+/* --- Mascot Positioning (Bottom Left) --- */
+#mascot-container {
+    position: absolute;
+    bottom: 85px; /* Sits above the taskbar */
+    left: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none; 
+    z-index: 5;
+}
+
+/* --- Start Menu Pull-Up Effect --- */
+#start-menu {
+    position: absolute;
+    bottom: 80px; 
+    left: 50%;
+    transform: translateX(-50%) translateY(20px); /* Start slightly lower */
+    width: 220px;
+    background: rgba(11, 36, 16, 0.95);
+    backdrop-filter: blur(15px);
+    border: var(--glass-border);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth pull-up */
+}
+
+/* When the "show" class is added via JS */
+#start-menu.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+/* Removed the horizontal line (hr) styling */
+.menu-items hr {
+    display: none; 
+}
+
 /* --- Windows & Settings --- */
 .window {
     position: absolute;
