@@ -1,3 +1,9 @@
+// Initialize Supabase Client
+// Ensure you have <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> in your HTML
+const _supabaseUrl = 'https://ovjimwuszbumvbdvvgqa.supabase.co';
+const _supabaseKey = 'sb_publishable_td5bQmP69MKTOpTAhzaHaw_L_1983_6';
+const supabase = supabase.createClient(_supabaseUrl, _supabaseKey);
+
 // 1. Dashboard Logic
 function updateDashboard() {
     const now = new Date();
@@ -15,47 +21,81 @@ function updateDashboard() {
 }
 
 // 2. Requirement 3: Desktop File Rendering
-function renderFiles() {
+async function renderFiles() {
     const grid = document.getElementById('file-grid');
-    grid.innerHTML = '';
-    const saved = localStorage.getItem('saved_document');
-    
-    if (saved) {
-        const fileDiv = document.createElement('div');
-        fileDiv.className = 'file-icon';
-        fileDiv.innerHTML = `<div class="file-paper"></div><span>Journal.txt</span>`;
-        fileDiv.onclick = () => {
-            document.getElementById('doc-editor').value = saved;
-            openApp('app-writer');
-        };
-        grid.appendChild(fileDiv);
+    grid.innerHTML = 'Loading...'; // Visual feedback for async action --> added March 9th 2026
+
+    try {
+        // Fetch the most recent journal entry
+        const { data, error } = await supabase
+            .from('entries')
+            .select('content')
+            .eq('id', 1) // Using ID 1 as a single-user "slot" for now
+            .single();
+
+        grid.innerHTML = ''; // Clear loading state
+
+        if (data) {
+            const fileDiv = document.createElement('div');
+            fileDiv.className = 'file-icon';
+            fileDiv.innerHTML = `<div class="file-paper"></div><span>Journal.txt</span>`;
+            fileDiv.onclick = () => {
+                document.getElementById('doc-editor').value = data.content;
+                openApp('app-writer');
+            };
+            grid.appendChild(fileDiv);
+        }
+    } catch (err) {
+        console.error("Error fetching data:", err);
+        grid.innerHTML = 'Error loading files.';
     }
 }
 
-function saveFile() {
+async function saveFile() {
     const content = document.getElementById('doc-editor').value;
-    localStorage.setItem('saved_document', content);
-    renderFiles(); // Update desktop icons immediately
-    alert('The document has been stored in your vault.');
+    
+    try {
+        // Use 'upsert' to either insert a new row or update existing row 1
+        const { error } = await supabase
+            .from('entries')
+            .upsert({ id: 1, content: content, updated_at: new Date() });
+
+        if (error) throw error;
+
+        await renderFiles(); // Update desktop icons only after success
+        alert('The document has been synced to the cloud.');
+    } catch (err) {
+        alert('Failed to save: ' + err.message);
+    }
 }
 
-// 3. Requirement 4: Settings Ritual
-function applySettings() {
-    const font = document.getElementById('set-font').value;
-    const size = document.getElementById('set-size').value;
-    const color = document.getElementById('set-color').value;
-    const loc = document.getElementById('set-loc').value;
+// 3. Settings (REFACTORED for Persistence, March 9th 2026)
+async function applySettings() {
+    const settings = {
+        id: 1, // Single user profile slot
+        font: document.getElementById('set-font').value,
+        size: document.getElementById('set-size').value,
+        color: document.getElementById('set-color').value,
+        location: document.getElementById('set-loc').value
+    };
 
-    // Apply styles to the body
-    document.body.style.fontFamily = font;
-    document.body.style.fontSize = size + "px";
-    document.documentElement.style.setProperty('--accent-color', color);
-    
-    if (loc) {
-        document.getElementById('weather').innerText = `Cloudy, 68°F | ${loc}`;
+    try {
+        const { error } = await supabase.from('settings').upsert(settings);
+        if (error) throw error;
+
+        // Apply visual changes
+        document.body.style.fontFamily = settings.font;
+        document.body.style.fontSize = settings.size + "px";
+        document.documentElement.style.setProperty('--accent-color', settings.color);
+        
+        if (settings.location) {
+            document.getElementById('weather').innerText = `Cloudy, 68°F | ${settings.location}`;
+        }
+        
+        closeApp('app-settings');
+    } catch (err) {
+        console.error("Settings failed to save:", err);
     }
-    
-    closeApp('app-settings');
 }
 
 // 4. App & Menu Management
