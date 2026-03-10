@@ -4,63 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>orcOS Prototype</title>
-    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Jim+Nightshade&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="desktop">
-        <div id="file-grid"></div>
-
         <div id="dashboard">
             <div id="clock">00:00:00</div>
             <div id="weather">Loading weather...</div>
-            <div id="date">Wednesday, March 4th, 2026</div>
         </div>
 
         <div id="app-writer" class="window hidden">
             <div class="window-header">
-                <span>The Scribe's Journal</span>
+                <span>Document Writer</span>
                 <button onclick="closeApp('app-writer')">X</button>
             </div>
             <div class="window-content">
-                <textarea id="doc-editor" placeholder="Start typing or Umah will attack you..."></textarea>
-                <button class="save-btn" onclick="saveFile()">Seal Document</button>
+                <textarea id="doc-editor" placeholder="Start typing..."></textarea>
+                <button class="save-btn" onclick="saveFile()">Save to Main Storage</button>
             </div>
-        </div>
-
-        <div id="app-settings" class="window hidden">
-            <div class="window-header">
-                <span>Kingdom Configuration</span>
-                <button onclick="closeApp('app-settings')">X</button>
-            </div>
-            <div class="window-content settings-grid">
-                <label>Font Type: <select id="set-font"><option value="Georgia">Serif</option><option value="'Jim Nightshade'">Script</option></select></label>
-                <label>Font Size: <input type="range" id="set-size" min="12" max="30"></label>
-                <label>Accent Color: <input type="color" id="set-color" value="#2ecc71"></label>
-                <label>Location: <input type="text" id="set-loc" placeholder="New York"></label>
-                <button class="save-btn" onclick="applySettings()">Apply Ritual</button>
-            </div>
-        </div>
-
-        <div id="mascot-container">
-            <img src="assets/orcOSmascot.PNG" alt="OrcOS Mascot" style="width:200px;">
-            <div id="welcome-msg">Welcome to orcOS!</div>
-        </div>
-
-        <div id="start-menu"> <div class="menu-header">orcOS v1.0</div>
-            <div class="menu-items">
-                <button class="scroll-btn" onclick="openApp('app-settings')">Settings</button>
-                <button class="scroll-btn" onclick="toggleBackground()">Personalize</button>
-                </div>
         </div>
 
         <div id="taskbar">
-            <button class="scroll-btn" onclick="toggleStartMenu()">Main Menu</button>
+            <button class="start-btn">Menu</button>
             <div class="app-icons">
-                <button class="scroll-btn" onclick="openApp('app-writer')">Journal</button>
-                <button class="scroll-btn" onclick="alert('You got an email!')">Email</button>
-                <button class="scroll-btn" onclick="toggleBackground()">Change Background</button>
+                <button onclick="openApp('app-writer')">Writer</button>
+                <button onclick="alert('You have email!')">Email</button>
+                <button onclick="toggleSettings()">Settings</button>
             </div>
         </div>
     </div>
