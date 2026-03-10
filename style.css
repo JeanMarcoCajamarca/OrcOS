@@ -1,224 +1,11 @@
 :root {
-    --bg-color: #0b2410; 
-    --taskbar-bg: rgba(255, 255, 255, 0.1);
-    --window-bg: rgba(255, 255, 255, 0.92);
-    --accent-color: #2ecc71;
-    --text-main: #ffffff;
-    --font-main: 'Times New Roman', serif;
-    --parchment: #f4e4bc; /* New for scrolls */
-    --font-gothic: 'UnifrakturMaguntia', serif;
-    --font-hand: 'Jim Nightshade', cursive;
-    --glass-border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    font-family: var(--font-main);
-    background-color: var(--bg-color);
-}
-
-#desktop {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(135deg, #0b2410 0%, #1a3c20 100%);
-    background-size: cover;
-    background-position: center;
-    position: relative;
-}
-
-/* --- Requirement 3: File Icons on Desktop --- */
-#file-grid {
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 100px);
-    gap: 30px;
-}
-
-.file-icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    cursor: pointer;
-    font-family: var(--font-hand);
-    font-size: 1.2rem;
-    text-shadow: 1px 1px 3px black;
-}
-
-.file-paper {
-    width: 50px;
-    height: 60px;
-    background: var(--parchment);
-    border: 1px solid #8b4513;
-    margin-bottom: 5px;
-    clip-path: polygon(0% 0%, 70% 0%, 100% 30%, 100% 100%, 0% 100%);
-    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
-}
-
-/* --- Dashboard --- */
-#dashboard {
-    position: absolute;
-    top: 40px;
-    right: 40px;
-    color: var(--text-main);
-    text-align: right;
-    pointer-events: none;
-}
-
-#clock { font-size: 4rem; letter-spacing: -2px; }
-#date { font-size: 1.8rem; opacity: 0.8; text-transform: uppercase; }
-
-/* --- Requirement 2: Scroll Buttons --- */
-.scroll-btn {
-    background: var(--parchment) !important;
-    border: 2px solid #8b4513 !important;
-    border-radius: 4px;
-    color: #4a2c0f !important;
-    font-family: var(--font-hand) !important;
-    font-size: 1.1rem;
-    padding: 6px 18px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    transition: transform 0.2s;
-    position: relative;
-}
-
-.scroll-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-}
-
-/* --- Requirement 1: Gothic Message --- */
-#welcome-msg {
-    font-family: var(--font-gothic);
-    font-size: 3rem;
-    color: white;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
-    animation: textPulse 4s ease-in-out infinite;
-}
-
-/* --- Mascot Positioning (Bottom Left) --- */
-#mascot-container {
-    position: absolute;
-    bottom: 85px; /* Sits above the taskbar */
-    left: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    pointer-events: none; 
-    z-index: 5;
-}
-
-.mascot-container img {
-    width: 250px; /* Ensure the container has size */
-    height: 200px;
-    animation: breathe 4s ease-in-out infinite;
-    background-image: url('./assets/orcOSmascot.PNG');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transform-origin: bottom center;
-}
-/* The Breathing Keyframes */
-@keyframes breathe {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05); /* Grows by 5% */
-    }
-}
-
-/* --- Start Menu Pull-Up Effect --- */
-#start-menu {
-    position: absolute;
-    bottom: 80px; 
-    left: 50%;
-    transform: translateX(-50%) translateY(20px); /* Start slightly lower */
-    width: 220px;
-    background: rgba(11, 36, 16, 0.95);
-    backdrop-filter: blur(15px);
-    border: var(--glass-border);
-    border-radius: 15px;
-    padding: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    z-index: 100;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth pull-up */
-}
-
-/* When the "show" class is added via JS */
-#start-menu.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-    pointer-events: auto;
-}
-
-/* Removed the horizontal line (hr) styling */
-.menu-items hr {
-    display: none; 
-}
-
-/* --- Windows & Settings --- */
-.window {
-    position: absolute;
-    top: 15%;
-    left: 20%;
-    width: 700px;
-    height: 450px;
-    background: var(--window-bg);
-    backdrop-filter: blur(15px);
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    z-index: 50;
-    border: var(--glass-border);
-}
-
-.window-header {
-    padding: 12px 20px;
-    background: rgba(0, 0, 0, 0.05);
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-#taskbar {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 70px;
-    background: var(--taskbar-bg);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    gap: 15px;
-}
-
-.hidden { display: none; }
-
-@keyframes textPulse {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
-}
-
-/* previously...
-:root {
     --bg-color: #2c3e50;
     --taskbar-color: rgba(255, 255, 255, 0.1);
     --window-bg: rgba(255, 255, 255, 0.95);
     --accent-color: #3498db;
     --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 body, html {
     margin: 0;
     padding: 0;
@@ -226,6 +13,7 @@ body, html {
     overflow: hidden;
     font-family: var(--font-main);
 }
+
 #desktop {
     width: 100vw;
     height: 100vh;
@@ -233,6 +21,7 @@ body, html {
     background-size: cover;
     transition: background 0.5s ease;
 }
+
 #dashboard {
     position: absolute;
     top: 20px;
@@ -241,7 +30,9 @@ body, html {
     text-align: right;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
+
 #clock { font-size: 3rem; font-weight: bold; }
+
 #taskbar {
     position: absolute;
     bottom: 0;
@@ -253,6 +44,7 @@ body, html {
     align-items: center;
     padding: 0 20px;
 }
+
 .window {
     position: absolute;
     top: 100px;
@@ -265,6 +57,7 @@ body, html {
     display: flex;
     flex-direction: column;
 }
+
 .window-header {
     padding: 10px;
     background: #eee;
@@ -272,11 +65,14 @@ body, html {
     justify-content: space-between;
     cursor: move;
 }
+
 .window-content { padding: 15px; flex-grow: 1; }
+
 #doc-editor {
     width: 100%;
     height: 80%;
     border: 1px solid #ccc;
     resize: none;
 }
-.hidden { display: none; } */
+
+.hidden { display: none; }
