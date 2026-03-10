@@ -1,7 +1,7 @@
 // Initialize Supabase Client
 // Ensure you have <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> in your HTML
 const _supabaseUrl = 'https://ovjimwuszbumvbdvvgqa.supabase.co';
-const _supabaseKey = 'sb_publishable_td5bQmP69MKTOpTAhzaHaw_L_1983_6';
+const _supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im92amltd3VzemJ1bXZiZHZ2Z3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMjg2ODMsImV4cCI6MjA4NzcwNDY4M30.3cyON8YKHiq4m873YV_QxVE-uT4daGfJ7aXnzWfN7Gw';
 const supabase = supabase.createClient(_supabaseUrl, _supabaseKey);
 
 // 1. Dashboard Logic
