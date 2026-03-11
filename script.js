@@ -91,3 +91,8 @@ function openApp(id) {
 }
 
 function closeApp(id) { document.getElementById(id).classList.add('hidden'); }
+
+// Mascot Interactivity
+document.getElementById('mascot').addEventListener('click', () => {
+    alert("Hi! I'm Jemma! Welcome to the horde!'");
+});
