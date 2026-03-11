@@ -1,4 +1,110 @@
 :root {
+    --bg-color: DarkOliveGreen; /* Task 1 */
+    --taskbar-color: rgba(0, 0, 0, 0.4);
+    --window-bg: #f4e4bc; /* Parchment-like color for windows */
+    --accent-color: #5d4037;
+    --font-gothic: 'MedievalSharp', cursive; /* Task 3 */
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--font-gothic);
+}
+
+#desktop {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color); /* Task 1 */
+    background-size: cover;
+    position: relative;
+}
+
+/* Task 3: Welcome Message Styling */
+#welcome-msg {
+    position: absolute;
+    bottom: 70px; /* Above taskbar */
+    left: 20px;
+    font-size: 1.8rem;
+    color: #f4e4bc;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+#dashboard {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    text-align: right;
+}
+
+/* Task 2: Centered Taskbar and Scroll Buttons */
+#taskbar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: var(--taskbar-color);
+    display: flex;
+    justify-content: center; /* Centering buttons */
+    align-items: center;
+}
+
+.app-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.scroll-btn {
+    background: #e2c285;
+    border: 2px solid #5d4037;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-family: var(--font-gothic);
+    font-weight: bold;
+    cursor: pointer;
+    /* Creating a simple "scroll" look with box shadows */
+    box-shadow: -5px 0 0 #bc9a5c, 5px 0 0 #bc9a5c; 
+    transition: transform 0.2s;
+}
+
+.scroll-btn:hover {
+    transform: scale(1.1);
+}
+
+.window {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 400px;
+    background: var(--window-bg);
+    border: 3px solid #5d4037;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.window-header {
+    padding: 8px;
+    background: #5d4037;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.window-content { 
+    padding: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+.hidden { display: none; }
+
+/* Keep as of Marcg 11th, 2026
+:root {
     --bg-color: #2c3e50;
     --taskbar-color: rgba(255, 255, 255, 0.1);
     --window-bg: rgba(255, 255, 255, 0.95);
@@ -75,4 +181,4 @@ body, html {
     resize: none;
 }
 
-.hidden { display: none; }
+.hidden { display: none; } */
