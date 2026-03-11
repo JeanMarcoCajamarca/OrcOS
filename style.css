@@ -37,6 +37,7 @@ body, html {
 .scroll-btn {
     background: #e2c285; border: 2px solid #5d4037;
     padding: 5px 15px; cursor: pointer;
+    margin: 0 10px; /* Creates the space between Journal and Settings */
     box-shadow: -5px 0 0 #bc9a5c, 5px 0 0 #bc9a5c;
     font-family: var(--font-gothic);
 }
