@@ -23,6 +23,17 @@ body, html {
     transition: all 0.3s ease;
 }
 
+/* Orc Mascot Styling --> march 11th, 2026, 2:01PM */
+#mascot {
+    position: absolute;
+    bottom: 130px; /* Positioned above the welcome message */
+    right: 30px;
+    width: 120px;  /* Adjust size as needed */
+    height: auto;
+    z-index: 5;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
+}
+
 /* Task 2: Welcome message moved to bottom right and sized up */
 #welcome-msg {
     position: absolute;
