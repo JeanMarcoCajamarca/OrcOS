@@ -11,21 +11,35 @@
 <body>
 
     <div id="desktop">
-        <div id="welcome-msg">Welcome to orcOS</div>
+        <div id="welcome-msg">Welcome to orcOS!</div>
 
         <div id="dashboard">
             <div id="clock">00:00:00</div>
             <div id="weather">Loading weather...</div>
+            <div id="date-display"></div>
         </div>
 
-        <div id="app-writer" class="window hidden">
+        <div id="app-journal" class="window hidden">
             <div class="window-header">
-                <span>Document Writer</span>
-                <button onclick="closeApp('app-writer')">X</button>
+                <span>Journal</span>
+                <button onclick="confirmClose('app-journal')">X</button>
             </div>
             <div class="window-content">
-                <textarea id="doc-editor" placeholder="Start typing..."></textarea>
-                <button class="save-btn" onclick="saveFile()">Save to Main Storage</button>
+                <div class="editor-tools">
+                    <select id="journal-font-size" onchange="updateJournalStyle()">
+                        <option value="14px">Small</option>
+                        <option value="18px" selected>Medium</option>
+                        <option value="24px">Large</option>
+                    </select>
+                    <select id="journal-font-family" onchange="updateJournalStyle()">
+                        <option value="'MedievalSharp', cursive">Gothic</option>
+                        <option value="serif">Serif</option>
+                        <option value="sans-serif">Modern</option>
+                    </select>
+                    <span id="word-count">0 / 1000 words</span>
+                </div>
+                <textarea id="journal-editor" placeholder="Etch your thoughts..." oninput="checkWordCount()"></textarea>
+                <button class="save-btn" onclick="saveJournal()">Save Entry</button>
             </div>
         </div>
 
@@ -34,31 +48,32 @@
                 <span>System Settings</span>
                 <button onclick="closeApp('app-settings')">X</button>
             </div>
-            <div class="window-content">
-                <label>Background Color:</label>
-                <input type="color" id="bg-color-picker" onchange="updateSetting('bg', this.value)">
+            <div class="window-content settings-grid">
+                <section>
+                    <h4>Visuals</h4>
+                    <label>Background:</label>
+                    <input type="color" onchange="updateSetting('bg', this.value)">
+                    <label>Taskbar:</label>
+                    <input type="color" onchange="updateSetting('taskbar', this.value)">
+                    <label>Upload Background:</label>
+                    <input type="file" accept="image/*" onchange="uploadBackground(event)">
+                </section>
                 
-                <label>Font Size:</label>
-                <select onchange="updateSetting('fontSize', this.value)">
-                    <option value="14px">Small</option>
-                    <option value="18px" selected>Medium</option>
-                    <option value="24px">Large</option>
-                </select>
-
-                <label>Font Type:</label>
-                <select onchange="updateSetting('fontFamily', this.value)">
-                    <option value="'MedievalSharp', cursive">Gothic</option>
-                    <option value="serif">Classic Serif</option>
-                    <option value="sans-serif">Modern</option>
-                </select>
+                <section>
+                    <h4>Layout & Text</h4>
+                    <label>Dashboard Alignment:</label>
+                    <select onchange="updateSetting('align', this.value)">
+                        <option value="right">Right</option>
+                        <option value="left">Left</option>
+                        <option value="center">Center</option>
+                    </select>
+                </section>
             </div>
         </div>
 
         <div id="taskbar">
             <div class="app-icons">
-                <button class="scroll-btn start-btn">Main Menu</button>
-                <button class="scroll-btn" onclick="openApp('app-writer')">Journal</button>
-                <button class="scroll-btn" onclick="alert('You have email!')">Email</button>
+                <button class="scroll-btn" onclick="openApp('app-journal')">Journal</button>
                 <button class="scroll-btn" onclick="openApp('app-settings')">Settings</button>
             </div>
         </div>
