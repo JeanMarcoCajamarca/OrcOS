@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>orcOS Prototype</title>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
     <div id="desktop">
+        <div id="welcome-msg">Welcome to orcOS!</div>
+
         <div id="dashboard">
             <div id="clock">00:00:00</div>
             <div id="weather">Loading weather...</div>
@@ -25,12 +29,37 @@
             </div>
         </div>
 
+        <div id="app-settings" class="window hidden">
+            <div class="window-header">
+                <span>System Settings</span>
+                <button onclick="closeApp('app-settings')">X</button>
+            </div>
+            <div class="window-content">
+                <label>Background Color:</label>
+                <input type="color" id="bg-color-picker" onchange="updateSetting('bg', this.value)">
+                
+                <label>Font Size:</label>
+                <select onchange="updateSetting('fontSize', this.value)">
+                    <option value="14px">Small</option>
+                    <option value="18px" selected>Medium</option>
+                    <option value="24px">Large</option>
+                </select>
+
+                <label>Font Type:</label>
+                <select onchange="updateSetting('fontFamily', this.value)">
+                    <option value="'MedievalSharp', cursive">Gothic</option>
+                    <option value="serif">Classic Serif</option>
+                    <option value="sans-serif">Modern</option>
+                </select>
+            </div>
+        </div>
+
         <div id="taskbar">
-            <button class="start-btn">Menu</button>
             <div class="app-icons">
-                <button onclick="openApp('app-writer')">Writer</button>
-                <button onclick="alert('You have email!')">Email</button>
-                <button onclick="toggleSettings()">Settings</button>
+                <button class="scroll-btn start-btn">Main Menu</button>
+                <button class="scroll-btn" onclick="openApp('app-writer')">Journal</button>
+                <button class="scroll-btn" onclick="alert('You have email!')">Email</button>
+                <button class="scroll-btn" onclick="openApp('app-settings')">Settings</button>
             </div>
         </div>
     </div>
