@@ -26,12 +26,21 @@ body, html {
 /* Orc Mascot Styling --> march 11th, 2026, 2:01PM */
 #mascot {
     position: absolute;
-    bottom: 130px; /* Positioned above the welcome message */
-    right: 30px;
-    width: 120px;  /* Adjust size as needed */
+    bottom: 110px; /* Positioned above the welcome message */
+    right: 25px;
+    width: 180px;  /* Adjust size as needed */
     height: auto;
     z-index: 5;
     filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
+    /* Added Breathing Animation */
+    animation: breathing 3s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+/* Breathing Animation Logic */
+@keyframes breathing {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 /* Task 2: Welcome message moved to bottom right and sized up */
