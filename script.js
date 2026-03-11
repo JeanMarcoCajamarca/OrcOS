@@ -1,7 +1,7 @@
 // Initialize Supabase Client
-const _supabaseUrl = 'https://ovjimwuszbumvbdvvgqa.supabase.co';
-const _supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im92amltd3VzemJ1bXZiZHZ2Z3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMjg2ODMsImV4cCI6MjA4NzcwNDY4M30.3cyON8YKHiq4m873YV_QxVE-uT4daGfJ7aXnzWfN7Gw';
-const supabase = supabase.createClient(_supabaseUrl, _supabaseKey);
+//const _supabaseUrl = 'https://ovjimwuszbumvbdvvgqa.supabase.co';
+//const _supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im92amltd3VzemJ1bXZiZHZ2Z3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMjg2ODMsImV4cCI6MjA4NzcwNDY4M30.3cyON8YKHiq4m873YV_QxVE-uT4daGfJ7aXnzWfN7Gw';
+//const supabase = supabase.createClient(_supabaseUrl, _supabaseKey);
 
 // 1. Clock, Weather, and Date Logic
 function updateDashboard() {
