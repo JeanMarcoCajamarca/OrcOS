@@ -94,5 +94,5 @@ function closeApp(id) { document.getElementById(id).classList.add('hidden'); }
 
 // Mascot Interactivity
 document.getElementById('mascot').addEventListener('click', () => {
-    alert("Hi! I'm Jemma! Welcome to the horde!");
+    alert("Hi, I'm Jemma! I'm the mascot of orcOS! Welcome to the horde!");
 });
