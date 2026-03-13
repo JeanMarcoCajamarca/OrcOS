@@ -25,6 +25,24 @@ function updateDashboard() {
 setInterval(updateDashboard, 1000);
 updateDashboard();
 
+// NEW --> Browser Search Bar Logic ---> added march 13th 2016
+function launchSite() {
+    let url = document.getElementById('browser-url').value;
+    const browser = document.getElementById('browser-choice').value;
+
+    if (!url) return;
+
+    // Ensure URL has http/https
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        url = 'https://' + url;
+    }
+
+    // Since orcOS runs in a browser, we open a new tab/window.
+    // Note: JS cannot force a specific browser software to launch for security reasons,
+    // but this will open the link in a new window/tab as requested.
+    window.open(url, '_blank');
+}
+
 // 2. Journal Logic (Task 4)
 function checkWordCount() {
     const text = document.getElementById('journal-editor').value;
