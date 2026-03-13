@@ -17,6 +17,35 @@ body, html {
     position: relative;
 }
 
+/* Browser Search Bar Styling, march 13, 2026 */
+#browser-search-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+    background: #f4e4bc; /* Parchment color */
+    padding: 10px;
+    border: 2px solid #5d4037;
+    border-radius: 5px;
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+#browser-url {
+    width: 300px;
+    padding: 5px;
+    border: 1px solid #5d4037;
+    background: transparent;
+    font-family: var(--font-gothic);
+}
+
+#browser-choice {
+    font-family: var(--font-gothic);
+    background: #e2c285;
+    border: 1px solid #5d4037;
+}
+
 #dashboard {
     position: absolute; top: 20px; right: 20px;
     color: white; text-align: right;
