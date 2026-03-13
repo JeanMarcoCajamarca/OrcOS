@@ -25,6 +25,55 @@ function updateDashboard() {
 setInterval(updateDashboard, 1000);
 updateDashboard();
 
+// NEW Movable Element Logic (Task: Moveable Search Bar) - march 13th 2026
+function dragElement(elmnt) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    elmnt.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        // Don't drag if clicking buttons or inputs
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'BUTTON') return;
+        
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+
+        let newTop = elmnt.offsetTop - pos2;
+        let newLeft = elmnt.offsetLeft - pos1;
+
+        // Boundary Check: Prevent dragging onto taskbar (60px from bottom)
+        const taskbarHeight = 60;
+        const windowHeight = window.innerHeight;
+        if (newTop + elmnt.offsetHeight > windowHeight - taskbarHeight) {
+            newTop = windowHeight - taskbarHeight - elmnt.offsetHeight;
+        }
+        
+        // Prevent dragging off top or sides
+        if (newTop < 0) newTop = 0;
+        if (newLeft < 0) newLeft = 0;
+
+        elmnt.style.top = newTop + "px";
+        elmnt.style.left = newLeft + "px";
+    }
+
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
 // NEW --> Browser Search Bar Logic ---> added march 13th 2016
 function launchSite() {
     let url = document.getElementById('browser-url').value;
