@@ -58,8 +58,8 @@ body, html {
     position: absolute;
     bottom: 110px; /* Positioned above the welcome message */
     right: 25px;
-    width: 280px;  /* Adjust size as needed */
-    height: 100px;
+    width: 200px;  /* Adjust size as needed */
+    height: 180px;
     z-index: 5;
     filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
     /* Added Breathing Animation */
