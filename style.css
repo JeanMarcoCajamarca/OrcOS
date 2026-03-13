@@ -58,7 +58,7 @@ body, html {
     position: absolute;
     bottom: 110px; /* Positioned above the welcome message */
     right: 25px;
-    width: 180px;  /* Adjust size as needed */
+    width: 280px;  /* Adjust size as needed */
     height: auto;
     z-index: 5;
     filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
@@ -91,6 +91,7 @@ body, html {
     position: absolute; bottom: 0; width: 100%; height: 60px;
     background: var(--taskbar-color);
     display: flex; justify-content: center; align-items: center;
+    z-index: 1000;
 }
 
 /* Task 1: Added margin to create space between buttons */
@@ -110,14 +111,26 @@ body, html {
 
 .editor-tools { display: flex; gap: 10px; align-items: center; }
 
+/* windows are now resizable, march 13th 2026
 .window {
     position: absolute; top: 50px; left: 50px;
-    width: 500px; background: var(--window-bg);
-    border: 3px solid #5d4037; display: flex; flex-direction: column;
+    width: 500px; min-width: 300px; min-height: 350px;
+    background: var(--window-bg);
+    border: 3px solid #5d4037; 
+    display: flex; flex-direction: column;
+    overflow: auto; 
+    resize: both; /* Allows window resizing */
+    box-shadow: 5px 10px 20px rgba(0,0,0,0.4);
+    z-index: 10;
 }
 
-.window-header { padding: 8px; background: #5d4037; color: white; display: flex; justify-content: space-between; }
-.window-content { padding: 15px; }
+.window-header { 
+    padding: 8px; background: #5d4037; color: white; 
+    display: flex; justify-content: space-between; 
+    cursor: move; /* Header is for dragging */
+}
+
+.window-content { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
 .hidden { display: none; }
 
 /* Keep as of Marcg 11th, 2026
