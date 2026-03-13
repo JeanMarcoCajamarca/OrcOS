@@ -15,6 +15,18 @@ Mascot is Jemma the orc -->
 <body>
 
     <div id="desktop">
+        <div id="browser-search-container">
+            <input type="text" id="browser-url" placeholder="Enter realm address (e.g., google.com)..." onkeydown="if(event.key === 'Enter') launchSite()">
+            <select id="browser-choice">
+                <option value="default">Default Tab</option>
+                <option value="chrome">Chrome</option>
+                <option value="safari">Safari</option>
+                <option value="edge">Edge</option>
+                <option value="firefox">Firefox</option>
+            </select>
+            <button class="scroll-btn" onclick="launchSite()">Explore!</button>
+        </div>
+        
         <img src="assets/orcOSmascot.PNG" id="mascot">
         <div id="welcome-msg">Welcome to orcOS</div>
 
