@@ -15,7 +15,7 @@ Mascot is Jemma the orc -->
 <body>
 
     <div id="desktop">
-        <div id="browser-search-container">
+        <div id="browser-search-container" onmousedown="dragElement(this)">
             <input type="text" id="browser-url" placeholder="Enter a realm..." onkeydown="if(event.key === 'Enter') launchSite()">
             <select id="browser-choice">
                 <option value="default">Default Tab</option>
