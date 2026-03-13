@@ -58,7 +58,7 @@ body, html {
     position: absolute;
     bottom: 110px; /* Positioned above the welcome message */
     right: 25px;
-    width: 180px;  /* Adjust size as needed */
+    width: 280px;  /* Adjust size as needed */
     height: auto;
     z-index: 5;
     filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
