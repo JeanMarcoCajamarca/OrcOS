@@ -105,9 +105,13 @@ function checkWordCount() {
 }
 
 function saveJournal() {
-    const content = document.getElementById('journal-editor').value;
-    localStorage.setItem('orcOS_journal', content);
-    alert("Journal entry etched into storage!");
+    const journalData = {
+        content: document.getElementById('journal-editor').value,
+        fontSize: document.getElementById('journal-font-size').value,
+        fontFamily: document.getElementById('journal-font-family').value
+    };
+    localStorage.setItem('orcOS_journal_data', JSON.stringify(journalData));
+    alert("Journal entry and style etched into storage!");
 }
 
 function confirmClose(id) {
@@ -120,8 +124,11 @@ function confirmClose(id) {
 
 function updateJournalStyle() {
     const editor = document.getElementById('journal-editor');
-    editor.style.fontSize = document.getElementById('journal-size').value;
-    editor.style.fontFamily = document.getElementById('journal-font').value;
+    const size = document.getElementById('journal-font-size').value;
+    const family = document.getElementById('journal-font-family').value;
+    
+    editor.style.fontSize = size;
+    editor.style.fontFamily = family;
 }
 
 // 3. Settings Logic (Task 5)
@@ -152,8 +159,15 @@ function uploadBackground(event) {
 function openApp(id) {
     document.getElementById(id).classList.remove('hidden');
     if (id === 'app-journal') {
-        const saved = localStorage.getItem('orcOS_journal');
-        if (saved) document.getElementById('journal-editor').value = saved;
+        const savedData = localStorage.getItem('orcOS_journal_data');
+        if (savedData) {
+            const data = JSON.parse(savedData);
+            document.getElementById('journal-editor').value = data.content;
+            document.getElementById('journal-font-size').value = data.fontSize;
+            document.getElementById('journal-font-family').value = data.fontFamily;
+            updateJournalStyle(); // Apply the saved styles immediately
+            checkWordCount();
+        }
     }
 }
 
