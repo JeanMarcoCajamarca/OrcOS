@@ -109,6 +109,8 @@ body, html {
 }
 
 #justin-dragon {
+    width: 115px;  /* Change to your desired width */
+    height: auto;   /* This maintains the aspect ratio */
     margin-left: 20px; 
     margin-right: 40px; /* Distance from Jemma on the right */
 }
