@@ -8,11 +8,9 @@ function updateDashboard() {
     const now = new Date();
     document.getElementById('clock').innerText = now.toLocaleTimeString();
     
-    // Task 3: Specific Date Format
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     let dateStr = now.toLocaleDateString('en-US', options).toUpperCase();
     
-    // Adding the "TH" to the date
     const day = now.getDate();
     let suffix = "TH";
     if (day === 1 || day === 21 || day === 31) suffix = "ST";
@@ -25,16 +23,13 @@ function updateDashboard() {
 setInterval(updateDashboard, 1000);
 updateDashboard();
 
-// NEW Movable Element Logic (Task: Moveable Search Bar) - march 13th 2026
+// Movable Element Logic
 function dragElement(elmnt) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     elmnt.onmousedown = dragMouseDown;
 
     function dragMouseDown(e) {
-        // Don't drag if clicking buttons or inputs
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'BUTTON') return;
-        
-        e = e || window.event;
         e.preventDefault();
         pos3 = e.clientX;
         pos4 = e.clientY;
@@ -43,7 +38,6 @@ function dragElement(elmnt) {
     }
 
     function elementDrag(e) {
-        e = e || window.event;
         e.preventDefault();
         pos1 = pos3 - e.clientX;
         pos2 = pos4 - e.clientY;
@@ -53,14 +47,6 @@ function dragElement(elmnt) {
         let newTop = elmnt.offsetTop - pos2;
         let newLeft = elmnt.offsetLeft - pos1;
 
-        // Boundary Check: Prevent dragging onto taskbar (60px from bottom)
-        const taskbarHeight = 60;
-        const windowHeight = window.innerHeight;
-        if (newTop + elmnt.offsetHeight > windowHeight - taskbarHeight) {
-            newTop = windowHeight - taskbarHeight - elmnt.offsetHeight;
-        }
-        
-        // Prevent dragging off top or sides
         if (newTop < 0) newTop = 0;
         if (newLeft < 0) newLeft = 0;
 
@@ -74,34 +60,22 @@ function dragElement(elmnt) {
     }
 }
 
-// NEW --> Browser Search Bar Logic ---> added march 13th 2016
+// Browser Search Bar Logic
 function launchSite() {
     let url = document.getElementById('browser-url').value;
-    const browser = document.getElementById('browser-choice').value;
-
     if (!url) return;
-
-    // Ensure URL has http/https
     if (!url.startsWith('http://') && !url.startsWith('https://')) {
         url = 'https://' + url;
     }
-
-    // Since orcOS runs in a browser, we open a new tab/window.
-    // Note: JS cannot force a specific browser software to launch for security reasons,
-    // but this will open the link in a new window/tab as requested.
     window.open(url, '_blank');
 }
 
-// 2. Journal Logic (Task 4)
+// Journal Logic
 function checkWordCount() {
     const text = document.getElementById('journal-editor').value;
     const words = text.trim().split(/\s+/).filter(item => item).length;
     document.getElementById('word-count').innerText = `${words} / 1000 words`;
-    
-    if (words > 1000) {
-        alert("You have reached the 1000 word limit!");
-        // Optional: truncate text here if desired
-    }
+    if (words > 1000) alert("You have reached the 1000 word limit!");
 }
 
 function saveJournal() {
@@ -111,27 +85,21 @@ function saveJournal() {
 }
 
 function confirmClose(id) {
-    const choice = confirm("Your document will be lost if you do not save. Are you sure you want to close now?");
-    if (choice) { // "OK/Yes" means close
-        closeApp(id);
-    }
-    // "Cancel/No" does nothing, allowing user to keep writing
+    if (confirm("Your document will be lost if you do not save. Are you sure?")) closeApp(id);
 }
 
 function updateJournalStyle() {
     const editor = document.getElementById('journal-editor');
-    editor.style.fontSize = document.getElementById('journal-size').value;
-    editor.style.fontFamily = document.getElementById('journal-font').value;
+    editor.style.fontSize = document.getElementById('journal-font-size').value;
+    editor.style.fontFamily = document.getElementById('journal-font-family').value;
 }
 
-// 3. Settings Logic (Task 5)
+// Settings Logic
 function updateSetting(type, value) {
-    const desktop = document.getElementById('desktop');
-    const dash = document.getElementById('dashboard');
-    
-    if (type === 'bg') desktop.style.backgroundColor = value;
+    if (type === 'bg') document.getElementById('desktop').style.backgroundColor = value;
     if (type === 'taskbar') document.getElementById('taskbar').style.background = value;
     if (type === 'align') {
+        const dash = document.getElementById('dashboard');
         dash.style.left = value === 'left' ? '20px' : (value === 'center' ? '40%' : 'auto');
         dash.style.right = value === 'right' ? '20px' : 'auto';
         dash.style.textAlign = value;
@@ -142,9 +110,7 @@ function uploadBackground(event) {
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
-        reader.onload = (e) => {
-            document.getElementById('desktop').style.backgroundImage = `url(${e.target.result})`;
-        };
+        reader.onload = (e) => document.getElementById('desktop').style.backgroundImage = `url(${e.target.result})`;
         reader.readAsDataURL(file);
     }
 }
@@ -159,7 +125,25 @@ function openApp(id) {
 
 function closeApp(id) { document.getElementById(id).classList.add('hidden'); }
 
-// Mascot Interactivity
+// --- Mascot & Character Logic ---
+
+// Jemma Logic
 document.getElementById('mascot').addEventListener('click', () => {
     alert("Hi, I'm Jemma! I'm the mascot of orcOS! Welcome to the horde!");
 });
+
+// Lara Barnes Logic
+const laraBarnes = document.getElementById('lara-barnes');
+if (laraBarnes) {
+    laraBarnes.addEventListener('click', () => {
+        alert("Hey! Lara Barnes here! I'm an elf working for the orcOS Times! Got something in mind? Write it down in 'Journal'!");
+    });
+}
+
+// Justin Dragon Logic
+const justinDragon = document.getElementById('justin-dragon');
+if (justinDragon) {
+    justinDragon.addEventListener('click', () => {
+        alert("Justin Dragon is my name! Settings is my game! I can fix it for you!");
+    });
+}
