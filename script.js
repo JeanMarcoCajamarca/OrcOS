@@ -54,9 +54,9 @@ function enterOS() {
     }
 
     console.log("Welcome to the Horde!");
-    //document.getElementById('login-screen').classList.add('hidden');
-    //document.getElementById('desktop').classList.remove('hidden');
-    //loadUserData(); // Pick up where they left off
+    /*document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('desktop').classList.remove('hidden');
+    loadUserData(); // Pick up where they left off */
 }
 
 async function handleSignOut() {
