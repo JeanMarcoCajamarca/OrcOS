@@ -41,9 +41,22 @@ async function handleAuth(type) {
 }
 
 function enterOS() {
-    document.getElementById('login-screen').classList.add('hidden');
-    document.getElementById('desktop').classList.remove('hidden');
-    loadUserData(); // Pick up where they left off
+    // 1. Hide the login screen (Assuming you have a div with this ID)
+    const loginScreen = document.getElementById('login-screen');
+    if (loginScreen) {
+        loginScreen.classList.add('hidden');
+    }
+
+    // 2. Show the desktop
+    const desktop = document.getElementById('desktop');
+    if (desktop) {
+        desktop.classList.remove('hidden');
+    }
+
+    console.log("Welcome to the Horde!");
+    //document.getElementById('login-screen').classList.add('hidden');
+    //document.getElementById('desktop').classList.remove('hidden');
+    //loadUserData(); // Pick up where they left off
 }
 
 async function handleSignOut() {
