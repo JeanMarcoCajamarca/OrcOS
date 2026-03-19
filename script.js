@@ -264,3 +264,13 @@ if (justinDragon) {
         alert("Justin Dragon is my name! Settings is my game! I can fix it for you!");
     });
 }
+
+// Automatically detect when a user returns from a confirmation email --> March 19, 2026
+db.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN' && session) {
+    console.log("Member verified!");
+    // Hide your login screen and show the desktop
+    document.getElementById('login-screen').classList.add('hidden'); 
+    document.getElementById('desktop').classList.remove('hidden');
+  }
+});
