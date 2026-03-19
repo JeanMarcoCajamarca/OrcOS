@@ -142,10 +142,63 @@ function checkWordCount() {
     if (words > 1000) alert("You have reached the 1000 word limit!");
 }
 
-function saveJournal() {
+/*function saveJournal() {
     const content = document.getElementById('journal-editor').value;
     localStorage.setItem('orcOS_journal', content);
     alert("Journal entry etched into storage!");
+}*/
+
+// Updated Save Function to use Supabase
+async function saveJournal() {
+    const content = document.getElementById('journal-editor').value;
+    
+    // Check if user is logged in first
+    const { data: { user } } = await db.auth.getUser();
+    
+    if (!user) {
+        // Fallback to local storage if not logged in
+        localStorage.setItem('orcOS_journal', content);
+        alert("Not logged in. Progress saved locally to this browser only.");
+        return;
+    }
+
+    // Save to Supabase 'user_data' table
+    const { error } = await db
+        .from('user_data')
+        .upsert({ 
+            user_id: user.id, 
+            journal_content: content,
+            last_updated: new Date() 
+        });
+
+    if (error) {
+        console.error("Cloud save failed:", error);
+        alert("Failed to etch into the cloud archives.");
+    } else {
+        alert("Journal entry synced to your account in the cloud!");
+    }
+}
+
+// Function to load data when the app opens
+async function openApp(id) {
+    document.getElementById(id).classList.remove('hidden');
+    
+    if (id === 'app-journal') {
+        const { data: { user } } = await db.auth.getUser();
+        
+        if (user) {
+            const { data } = await db
+                .from('user_data')
+                .select('journal_content')
+                .eq('user_id', user.id)
+                .single();
+            
+            if (data) document.getElementById('journal-editor').value = data.journal_content;
+        } else {
+            const saved = localStorage.getItem('orcOS_journal');
+            if (saved) document.getElementById('journal-editor').value = saved;
+        }
+    }
 }
 
 function confirmClose(id) {
