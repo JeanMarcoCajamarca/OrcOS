@@ -10,15 +10,24 @@ async function handleAuth(type) {
     const email = document.getElementById('auth-email').value;
     const password = document.getElementById('auth-password').value;
     const errorDisplay = document.getElementById('auth-error');
-
+    
     if (password.length > 10) {
         errorDisplay.innerText = "Password too long! 10 chars max., please!";
         return;
     }
 
+    errorDisplay.innerText = "Processing..."; // Give user feedback
+    
     let result;
     if (type === 'signup') {
         result = await db.auth.signUp({ email, password });
+        // If confirmation is OFF, signUp also logs the user in automatically
+        if (!result.error && result.data.user) {
+            currentUser = result.data.user;
+            alert("Welcome to the Horde! Entry granted.");
+            enterOS(); // <--- This moves you past the login screen
+            return;
+        }
     } else {
         result = await db.auth.signInWithPassword({ email, password });
     }
