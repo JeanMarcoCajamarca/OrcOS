@@ -13,20 +13,7 @@ Mascot is Jemma the orc -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    
-    <div id="login-screen">
-        <div class="login-box window-shell">
-            <h2>Identify Yourself, Stranger!</h2>
-            <input type="email" id="auth-email" placeholder="Email (Scroll Address)">
-            <input type="password" id="auth-password" placeholder="Password (Max 10 chars)" maxlength="10">
-            <div class="auth-buttons">
-                <button class="scroll-btn" onclick="handleAuth('login')">Enter the Horde!</button>
-                <button class="scroll-btn" onclick="handleAuth('signup')">Join the Horde!</button>
-            </div>
-            <p id="auth-error" style="color: red; font-size: 0.8rem;"></p>
-        </div>
-    </div>
-    
+  
     <div id="desktop">
         <div id="browser-search-container" onmousedown="dragElement(this)">
             <input type="text" id="browser-url" placeholder="Enter a realm..." onkeydown="if(event.key === 'Enter') launchSite()">
