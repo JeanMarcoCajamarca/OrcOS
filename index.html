@@ -13,7 +13,7 @@ Mascot is Jemma the orc -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    
+
     <div id="login-screen">
         <div class="login-box window-shell">
             <h2>Identify Yourself, Stranger</h2>
@@ -26,13 +26,16 @@ Mascot is Jemma the orc -->
             <p id="auth-error" style="color: red; font-size: 0.8rem;"></p>
         </div>
     </div>
-    
-    <div id="desktop">
+
+    <div id="desktop" class="hidden">
         <div id="browser-search-container" onmousedown="dragElement(this)">
             <input type="text" id="browser-url" placeholder="Enter a realm..." onkeydown="if(event.key === 'Enter') launchSite()">
             <select id="browser-choice">
-                <option value="tab">New Tab</option>
-                <option value="window">New Window</option>
+                <option value="default">Default Tab</option>
+                <option value="chrome">Chrome</option>
+                <option value="safari">Safari</option>
+                <option value="edge">Edge</option>
+                <option value="firefox">Firefox</option>
             </select>
             <button class="scroll-btn" onclick="launchSite()">Explore</button>
         </div>
@@ -42,7 +45,7 @@ Mascot is Jemma the orc -->
 
         <div id="dashboard">
             <div id="clock">00:00:00</div>
-            <div id="weather">39* Degrees, New York, NY</div>
+            <div id="weather">Loading weather...</div>
             <div id="date-display"></div>
         </div>
 
@@ -94,6 +97,7 @@ Mascot is Jemma the orc -->
                         <option value="left">Left</option>
                         <option value="center">Center</option>
                     </select>
+                    <button class="scroll-btn" onclick="handleSignOut()" style="margin-top:10px; width:100%;">Sign Out</button>
                 </section>
             </div>
         </div>
@@ -111,4 +115,3 @@ Mascot is Jemma the orc -->
     <script src="script.js"></script>
 </body>
 </html>
-
