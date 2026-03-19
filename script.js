@@ -3,6 +3,70 @@ const _supabaseUrl = 'https://ovjimwuszbumvbdvvgqa.supabase.co';
 const _supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im92amltd3VzemJ1bXZiZHZ2Z3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMjg2ODMsImV4cCI6MjA4NzcwNDY4M30.3cyON8YKHiq4m873YV_QxVE-uT4daGfJ7aXnzWfN7Gw';
 const db = supabase.createClient(_supabaseUrl, _supabaseKey);
 
+let currentUser = null;
+
+//Authentication Logic --> march 19, 2026
+async function handleAuth(type) {
+    const email = document.getElementById('auth-email').value;
+    const password = document.getElementById('auth-password').value;
+    const errorDisplay = document.getElementById('auth-error');
+
+    if (password.length > 10) {
+        errorDisplay.innerText = "Password too long! 10 chars max., please!";
+        return;
+    }
+
+    let result;
+    if (type === 'signup') {
+        result = await db.auth.signUp({ email, password });
+    } else {
+        result = await db.auth.signInWithPassword({ email, password });
+    }
+
+    if (result.error) {
+        errorDisplay.innerText = result.error.message;
+    } else {
+        currentUser = result.data.user;
+        enterOS();
+    }
+}
+
+function enterOS() {
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('desktop').classList.remove('hidden');
+    loadUserData(); // Pick up where they left off
+}
+
+async function handleSignOut() {
+    await db.auth.signOut();
+    location.reload(); // Returns to login screen
+}
+
+//Data Persistence (Supabase Database) --> added March 19, 2026
+async function saveToCloud() {
+    const filename = document.getElementById('journal-filename').value;
+    const content = document.getElementById('journal-editor').value;
+
+    const { error } = await db.from('user_data').upsert({ 
+        user_id: currentUser.id, 
+        journal_content: content,
+        settings: { bgColor: document.getElementById('desktop').style.backgroundColor }
+    });
+
+    if (error) alert("Error etching to cloud: " + error.message);
+    else alert("Progress saved to the Horde archives!");
+}
+
+async function loadUserData() {
+    const { data, error } = await db.from('user_data').select('*').eq('user_id', currentUser.id).single();
+    if (data) {
+        document.getElementById('journal-editor').value = data.journal_content || "";
+        if (data.settings && data.settings.bgColor) {
+            document.getElementById('desktop').style.backgroundColor = data.settings.bgColor;
+        }
+    }
+}
+
 // 1. Clock, Weather, and Date Logic
 function updateDashboard() {
     const now = new Date();
