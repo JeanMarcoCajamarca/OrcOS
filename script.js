@@ -63,7 +63,6 @@ async function handleSignOut() {
 
 //Data Persistence (Supabase Database) --> added March 19, 2026
 async function saveToCloud() {
-    const filename = document.getElementById('journal-filename').value;
     const content = document.getElementById('journal-editor').value;
 
     const { error } = await db.from('user_data').upsert({ 
@@ -251,14 +250,6 @@ function uploadBackground(event) {
     }
 }
 
-function openApp(id) {
-    document.getElementById(id).classList.remove('hidden');
-    if (id === 'app-journal') {
-        const saved = localStorage.getItem('orcOS_journal');
-        if (saved) document.getElementById('journal-editor').value = saved;
-    }
-}
-
 function closeApp(id) { document.getElementById(id).classList.add('hidden'); }
 
 // --- Mascot & Character Logic ---
@@ -288,8 +279,13 @@ if (justinDragon) {
 db.auth.onAuthStateChange((event, session) => {
   if (event === 'SIGNED_IN' && session) {
     console.log("Member verified!");
+    currentUser = session.user;
+    
     // Hide your login screen and show the desktop
     document.getElementById('login-screen').classList.add('hidden'); 
     document.getElementById('desktop').classList.remove('hidden');
+    
+    // Load their saved settings
+    loadUserData();
   }
 });
