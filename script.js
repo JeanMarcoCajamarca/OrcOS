@@ -5,27 +5,20 @@ const db = supabase.createClient(_supabaseUrl, _supabaseKey);
 
 let currentUser = null;
 
-//Authentication Logic --> march 19, 2026
+// Updated Authentication Logic --> March 20
 async function handleAuth(type) {
     const email = document.getElementById('auth-email').value;
     const password = document.getElementById('auth-password').value;
     const errorDisplay = document.getElementById('auth-error');
     
-    if (password.length > 10) {
-        errorDisplay.innerText = "Password too long! 10 chars max., please!";
-        return;
-    }
+    errorDisplay.innerText = "Processing..."; 
 
-    errorDisplay.innerText = "Processing..."; // Give user feedback
-    
     let result;
     if (type === 'signup') {
         result = await db.auth.signUp({ email, password });
-        // If confirmation is OFF, signUp also logs the user in automatically
-        if (!result.error && result.data.user) {
-            currentUser = result.data.user;
-            alert("Welcome to the Horde! Entry granted.");
-            enterOS(); // <--- This moves you past the login screen
+        if (!result.error) {
+            alert("Check your scroll-mail (email) to confirm your membership!");
+            errorDisplay.innerText = "Check your email to verify!";
             return;
         }
     } else {
@@ -33,27 +26,18 @@ async function handleAuth(type) {
     }
 
     if (result.error) {
-        errorDisplay.innerText = result.error.message;
+        errorDisplay.innerText = result.error.message; // Now it will show "Email not confirmed"
     } else {
         currentUser = result.data.user;
-        enterOS();
+        enterOS(); // This is the magic command to hide the login box
     }
 }
 
+// THE MISSING FUNCTION: This tells the browser to show the desktop
 function enterOS() {
-    // 1. Hide the login screen (Assuming you have a div with this ID)
-    const loginScreen = document.getElementById('login-screen');
-    if (loginScreen) {
-        loginScreen.classList.add('hidden');
-    }
-
-    // 2. Show the desktop
-    const desktop = document.getElementById('desktop');
-    if (desktop) {
-        desktop.classList.remove('hidden');
-    }
-
-    console.log("Welcome to the Horde!");
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('desktop').classList.remove('hidden');
+    console.log("Welcome to orcOS!");
     /*document.getElementById('login-screen').classList.add('hidden');
     document.getElementById('desktop').classList.remove('hidden');
     loadUserData(); // Pick up where they left off */
